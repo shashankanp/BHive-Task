@@ -18,6 +18,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+let analytics;
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+if (app.name && typeof window !== "undefined") {
+  analytics = getAnalytics(app);
+}
+
 export const auth = getAuth();

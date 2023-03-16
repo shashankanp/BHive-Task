@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className={poppins.className}>
+    <html className={`${poppins.className} mx-14 my-5`}>
       <head></head>
       <body>
         <header>
