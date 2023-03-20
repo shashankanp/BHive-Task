@@ -4,9 +4,9 @@ import React from "react";
 import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../utils/firebase";
+import dynamic from "next/dynamic";
 
-
-export default function Nav() {
+function Nav() {
   const [user, loading] = useAuthState(auth);
 
   return (
@@ -24,8 +24,12 @@ export default function Nav() {
         {user && (
           <div>
             <Link href={"/dashboard"}>
-              <img src={`${user.photoURL}`} alt="avatar"
-              referrerPolicy="no-referrer" className="rounded-full w-12 mx-auto"/>
+              <img
+                src={`${user.photoURL}`}
+                alt="avatar"
+                referrerPolicy="no-referrer"
+                className="rounded-full w-12 mx-auto"
+              />
             </Link>
             <h2>{user.displayName}</h2>
           </div>
@@ -34,3 +38,5 @@ export default function Nav() {
     </nav>
   );
 }
+
+export default dynamic(() => Promise.resolve(Nav), { ssr: false });

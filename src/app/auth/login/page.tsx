@@ -6,20 +6,33 @@ import { FaMicrosoft } from "react-icons/fa";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../../../utils/firebase";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Login() {
+  const [user, loading] = useAuthState(auth);
+
   // Sign in with Google
-  const route=useRouter();
+  const route = useRouter();
   const googleProvider = new GoogleAuthProvider();
   const GoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      console.log(result.user);
-      route.push("/dashboard")
+      // console.log(result.user);
+      route.push("/dashboard");
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      <h1 className="mx-10 my-10 text-4xl">You are already logged in...</h1>;
+      route.push("/dashboard");
+    } else {
+      console.log("Login");
+    }
+  }, [user]);
 
   return (
     <div className="shadow-xl mt-32 p-10 text-gray-700 rounded-lg max-w-sm mx-auto">
