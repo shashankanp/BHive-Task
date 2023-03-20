@@ -26,11 +26,11 @@ export default function Home() {
         .max(20, "Name must be lesser than 20 characters")
         .required("Name is required"),
       email: Yup.string()
-        .email("Not a valid Email Address")
         .matches(
           /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
           "Should be of format 'john@gmail.com'"
         )
+        .email("Not a valid Email Address")
         .required("Email is required"),
       phone: Yup.string()
         .phone("IN", "Please enter a valid phone number")
@@ -69,9 +69,7 @@ export default function Home() {
                 }`}
                 htmlFor="name"
               >
-                {formik.touched.name && formik.errors.name
-                  ? formik.errors.name
-                  : "Name"}
+                {formik.errors.name ? formik.errors.name : "Name"}
               </label>
               <input
                 type="text"
@@ -94,9 +92,7 @@ export default function Home() {
                 }`}
                 htmlFor="email"
               >
-                {formik.touched.email && formik.errors.email
-                  ? formik.errors.email
-                  : "Email Id"}
+                {formik.errors.email ? formik.errors.email : "Email Id"}
               </label>
               <input
                 type="email"
@@ -119,9 +115,7 @@ export default function Home() {
                 }`}
                 htmlFor="phone"
               >
-                {formik.touched.phone && formik.errors.phone
-                  ? formik.errors.phone
-                  : "Phone Number"}
+                {formik.errors.phone ? formik.errors.phone : "Phone Number"}
               </label>
               <input
                 type="tel"
@@ -166,9 +160,7 @@ export default function Home() {
                 }`}
                 htmlFor="terms"
               >
-                {formik.touched.terms && formik.errors.terms
-                  ? formik.errors.terms
-                  : "Terms of Service"}
+                {formik.errors.terms ? formik.errors.terms : "Terms of Service"}
               </label>
               <div className="flex items-center gap-2">
                 <input
