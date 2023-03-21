@@ -26,11 +26,11 @@ export default function Home() {
         .max(20, "Name must be lesser than 20 characters")
         .required("Name is required"),
       email: Yup.string()
+        .email("Not a valid Email Address")
         .matches(
           /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
           "Should be of format 'john@gmail.com'"
         )
-        .email("Not a valid Email Address")
         .required("Email is required"),
       phone: Yup.string()
         .phone("IN", "Please enter a valid phone number")
