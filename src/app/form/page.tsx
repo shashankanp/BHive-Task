@@ -6,6 +6,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "yup-phone-lite";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+// const REGISTER_URL = "../api/test/test1";
 
 export default function Home() {
   const router = useRouter();
@@ -39,14 +41,22 @@ export default function Home() {
     }),
 
     // Submit Form
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
       router.push("/success");
+      axios
+        .post("http://localhost:3000/api/test", {
+          Name: "Fred",
+          Age: "23",
+        })
+        .then(function (response) {
+          console.log(response);
+        });
     },
   });
 
   return (
-    <main className="h-screen flex items-center justify-center">
+    <main className="h-screen flex items-center justify-center md:mt-20">
       <form
         onSubmit={formik.handleSubmit}
         className="bg-white flex rounded-lg w-3/4"
@@ -150,6 +160,28 @@ export default function Home() {
               </select>
             </div>
 
+            {/* Image submission */}
+            {/* <div className="pb-4">
+              <label
+                className={`block text-sm pb-2 font-medium ${
+                  formik.touched.phone && formik.errors.phone
+                    ? "text-red-500"
+                    : ""
+                }`}
+                htmlFor="phone"
+              >
+                {formik.errors.phone ? formik.errors.phone : "Upload File"}
+              </label>
+              <input
+                type="file"
+                name="photo"
+                accept="image/*"
+                onChange={(e) =>
+                  formik.setFieldValue("photo", e.currentTarget.files[0])
+                }
+              />  
+            </div>*/}
+
             {/* Terms of Service */}
             <div className="pb-4">
               <label
@@ -177,6 +209,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
+
             <button
               type="submit"
               className="bg-teal-500 font-medium text-sm text-white py-3 mt-6 rounded-lg w-full"
