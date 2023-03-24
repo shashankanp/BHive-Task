@@ -44,14 +44,6 @@ export default function Home() {
     onSubmit: async (values) => {
       console.log(values);
       router.push("/success");
-      axios
-        .post("http://localhost:3000/api/test", {
-          Name: "Fred",
-          Age: "23",
-        })
-        .then(function (response) {
-          console.log(response);
-        });
     },
   });
 
